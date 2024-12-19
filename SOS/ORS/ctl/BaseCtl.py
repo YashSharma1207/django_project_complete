@@ -38,7 +38,7 @@ class BaseCtl(ABC):
     def submit(self, request, params={}):
         pass
 
-    def request_to_form(self, requestform):
+    def request_to_form(self, requestForm):
         pass
 
     def form_to_model(self, obj):

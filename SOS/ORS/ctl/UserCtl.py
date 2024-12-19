@@ -5,7 +5,7 @@ from ..models import User
 from ..utility.DataValidator import DataValidator
 
 
-class RegistrationCtl(BaseCtl):
+class UserCtl(BaseCtl):
 
     def request_to_form(self, requestForm):
         self.form['id'] = requestForm.get('id', None)
@@ -134,7 +134,7 @@ class RegistrationCtl(BaseCtl):
         return res
 
     def get_template(self):
-        return "Registration.html"
+        return "User.html"
 
     def get_service(self):
         return UserService()

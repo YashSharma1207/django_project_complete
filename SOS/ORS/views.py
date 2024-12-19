@@ -5,9 +5,9 @@ from .ctl.RegistrationCtl import RegistrationCtl
 from .ctl.LoginCtl import LoginCtl
 
 from .ctl.WelcomeCtl import WelcomeCtl
+from .ctl.UserCtl import UserCtl
 
 
-# from .ctl.UserCtl import UserCtl
 # from .ctl.UserListCtl import UserListCtl
 # from .ctl.RoleCtl import RoleCtl
 # from .ctl.RoleListCtl import RoleListCtl
@@ -25,5 +25,12 @@ def index(request):
     return res
 
 
-def auth():
-    return None
+@csrf_exempt
+def auth(request, page="", operation="", id=0):
+    if page == "Logout":
+        Session.objects.all().delete()
+        request.session['user'] = None
+        ctlName = "Login" + "Ctl()"
+        ctlObj = eval(ctlName)
+        res = ctlObj.execute(request, {"id": id, "operation": operation})
+    return res

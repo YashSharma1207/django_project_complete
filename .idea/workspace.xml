@@ -15,6 +15,7 @@
       <change afterPath="$PROJECT_DIR$/SOS/ORS/ctl/BaseCtl.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/ctl/LoginCtl.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/ctl/RegistrationCtl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SOS/ORS/ctl/UserCtl.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/ctl/WelcomeCtl.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/service/BaseService.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/service/RoleService.py" afterDir="false" />
@@ -22,6 +23,7 @@
       <change afterPath="$PROJECT_DIR$/SOS/ORS/template/Header.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/template/Login.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/template/Registration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SOS/ORS/template/User.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/template/Welcome.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/urls.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SOS/ORS/utility/DataValidator.py" afterDir="false" />
@@ -53,14 +55,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.models.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.models.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
