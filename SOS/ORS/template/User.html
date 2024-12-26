@@ -10,21 +10,20 @@
     {% csrf_token %}
     <div align="center">
         <h1>Add User</h1>
-        <h3><font color="green">{{ message }}</font></h3>
         <table>
             <input type="hidden" name="id" value="{{form.id}}">
             <tr>
-                <th>FirstName:</th>
+                <th>First Name:</th>
                 <td><input type="text" name="firstName" value="{{form.firstName}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.firstName }}</td>
             </tr>
             <tr>
-                <th>LastName:</th>
+                <th>Last Name:</th>
                 <td><input type="text" name="lastName" value="{{form.lastName}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.lastName }}</td>
             </tr>
             <tr>
-                <th>Login ID:</th>
+                <th>Login Id:</th>
                 <td><input type="text" name="loginId" value="{{form.loginId}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.loginId }}</td>
             </tr>
@@ -34,13 +33,13 @@
                 <td style="position: fixed; color: red;"> {{ form.inputError.password }}</td>
             </tr>
             <tr>
-                <th>Confirm:</th>
+                <th>Confirm Password:</th>
                 <td><input type="text" name="confirmPassword" value="{{form.confirmPassword}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.confirmPassword }}</td>
             </tr>
             <tr>
-                <th>DOB:</th>
-                <td><input type="date" name="dob" value="{{form.dob}}" style="width: 98%;"></td>
+                <th>Dob:</th>
+                <td><input type="date" name="dob" value="{{form.dob}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.dob }}</td>
             </tr>
             <tr>
@@ -60,12 +59,21 @@
                 <td style="position: fixed; color: red;">{{ form.inputError.gender }}</td>
             </tr>
             <tr>
-                <th>Mobile:</th>
+                <th>Mobile Number:</th>
                 <td><input type="text" name="mobileNumber" value="{{form.mobileNumber}}" style="width:98%"></td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.mobileNumber }}</td>
             </tr>
-            <th></th>
-            <td><input type="submit" value="save"></td>
+            <tr>
+                <th>Role:</th>
+                <td>
+                    {{ role_preload|safe }}
+                </td>
+                <td style="position: fixed; color: red;"> {{ form.inputError.roleId }}</td>
+            </tr>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" name="signUp"></td>
             </tr>
         </table>
     </div>

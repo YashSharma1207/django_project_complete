@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from ..service.UserService import UserService
+
 from .BaseCtl import BaseCtl
 from ..models import User
+from ..service.UserService import UserService
 from ..utility.DataValidator import DataValidator
 
 
 class RegistrationCtl(BaseCtl):
-
     def request_to_form(self, requestForm):
         self.form['id'] = requestForm.get('id', None)
         self.form['firstName'] = requestForm.get('firstName', '')
@@ -23,7 +23,7 @@ class RegistrationCtl(BaseCtl):
 
     def form_to_model(self, obj):
         pk = int(self.form['id'])
-        if (pk > 0):
+        if pk > 0:
             obj.id = pk
         obj.firstName = self.form['firstName']
         obj.lastName = self.form['lastName']
@@ -39,89 +39,88 @@ class RegistrationCtl(BaseCtl):
         return obj
 
     def model_to_form(self, obj):
-        if (obj == None):
+        if obj is None:
             return
-        self.form['id'] = obj.id
-        self.form['firstName'] = obj.firstName
-        self.form['lastName'] = obj.lastName
-        self.form['loginId'] = obj.loginId
-        self.form['password'] = obj.password
-        self.form['confirmPassword'] = obj.confirmPassword
-        self.form['dob'] = obj.dob
-        self.form['address'] = obj.address
-        self.form['gender'] = obj.gender
-        self.form['mobileNumber'] = obj.mobileNumber
-        self.form['roleId'] = 2
-        self.form['roleName'] = "student"
+        self.form["id"] = obj.id
+        self.form["firstName"] = obj.firstName
+        self.form["lastName"] = obj.lastName
+        self.form["loginId"] = obj.loginId
+        self.form["password"] = obj.password
+        self.form["confirmPassword"] = obj.confirmPassword
+        self.form["dob"] = obj.dob
+        self.form["address"] = obj.address
+        self.form["gender"] = obj.gender
+        self.form["mobileNumber"] = obj.mobileNumber
+        self.form["roleId"] = 2
+        self.form["roleName"] = "Student"
 
     def input_validation(self):
         super().input_validation()
         inputError = self.form['inputError']
+
         if (DataValidator.isNull(self.form['firstName'])):
-            inputError['firstName'] = "First Name is Required"
+            inputError['firstName'] = "First Name is required"
             self.form['error'] = True
         else:
             if (DataValidator.isAlphaCheck(self.form['firstName'])):
-                inputError['firstName'] = "First Name Contains Only Letters"
+                inputError['firstName'] = "First Name only contains Letters"
                 self.form['error'] = True
 
         if (DataValidator.isNull(self.form['lastName'])):
-            inputError['lastName'] = "Last Name is Required"
+            inputError['lastName'] = "Last Name is required"
             self.form['error'] = True
         else:
             if (DataValidator.isAlphaCheck(self.form['lastName'])):
-                inputError['lastName'] = "Last Name Contains Only Letters"
+                inputError['firstName'] = "Last Name only contains Letters"
                 self.form['error'] = True
 
-        if (DataValidator.isNull(self.form["loginId"])):
-            inputError['loginId'] = "Login ID is Required"
-            self.form["error"] = True
+        if (DataValidator.isNull(self.form['loginId'])):
+            inputError['loginId'] = "Login Id is required"
+            self.form['error'] = True
         else:
-            if (DataValidator.isEmail(self.form["loginId"])):
-                inputError['loginId'] = "Login ID Must Be Like example@gmail.com"
-                self.form["error"] = True
-
-        if (DataValidator.isNull(self.form["password"])):
-            inputError['password'] = "Password is Required"
-            self.form["error"] = True
-
-        if (DataValidator.isNull(self.form["confirmPassword"])):
-            inputError['confirmPassword'] = "Confirm Password is Required"
-            self.form["error"] = True
-
-        if (DataValidator.isNotNull(self.form['confirmPassword'])):
-            if self.form['password'] != self.form['confirmPassword']:
-                inputError['confirmPassword'] = "Password And Confirm Password Are Not Same"
+            if (DataValidator.isEmail(self.form['loginId'])):
+                inputError['loginId'] = "Login ID must be in correct way ex-abc@gmail.com"
                 self.form['error'] = True
 
-        if (DataValidator.isNull(self.form["dob"])):
-            inputError["dob"] = "DOB is Required"
+        if (DataValidator.isNull(self.form['password'])):
+            inputError['password'] = "Password is required"
+            self.form['error'] = True
+
+        if(DataValidator.isNull(self.form['confirmPassword'])):
+            inputError['confirmPassword']="confirm password is required"
+            self.form['error']=True
+        else:
+            if(DataValidator.isNotNull(self.form['confirmPassword'])):
+                if self.form['password']!=self.form['confirmPassword']:
+                    inputError['confirmPassword']="Password and Confirm password must be same"
+                    self.form['error']=True
+
+        if (DataValidator.isNull(self.form['dob'])):
+            inputError['dob'] = "DOB is required"
             self.form['error'] = True
         else:
             if (DataValidator.isDate(self.form['dob'])):
-                inputError['dob'] = "Incorrect Date, Should Be YYYY-MM-DD"
+                inputError['dob'] = "Incorrect Date, should be YYYY-MM-DD"
                 self.form['error'] = True
 
         if (DataValidator.isNull(self.form['address'])):
-            inputError['address'] = "Address is Required"
+            inputError['address'] = "Address is required"
             self.form['error'] = True
 
         if (DataValidator.isNull(self.form['gender'])):
-            inputError['gender'] = "Gender is Required"
+            inputError['gender'] = "Gender is required"
             self.form['error'] = True
-        else:
-            if (DataValidator.isAlphaCheck(self.form['gender'])):
-                inputError['gender'] = "Gender Contains Only Letters"
-                self.form['error'] = True
 
         if (DataValidator.isNull(self.form['mobileNumber'])):
-            inputError['mobileNumber'] = "Mobile Number is Required"
+            inputError['mobileNumber'] = "Mobile Number is required"
             self.form['error'] = True
         else:
             if (DataValidator.isMobileCheck(self.form['mobileNumber'])):
                 inputError['mobileNumber'] = "Enter Correct Mobile No."
                 self.form['error'] = True
         return self.form['error']
+
+
 
     def display(self, request, params={}):
         res = render(request, self.get_template(), {'form': self.form})
