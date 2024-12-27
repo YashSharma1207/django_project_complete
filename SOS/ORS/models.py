@@ -2,6 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
+    objects = None
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
     loginId = models.EmailField()
