@@ -1,8 +1,21 @@
 from django.db import models
 
 
+class Role(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+
+    def get_key(self):
+        return str(self.id)
+
+    def get_value(self):
+        return self.name
+
+    class Meta:
+        db_table = 'sos_role'
+
+
 class User(models.Model):
-    objects = None
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
     loginId = models.EmailField()
@@ -23,17 +36,3 @@ class User(models.Model):
 
     class Meta:
         db_table = 'sos_user'
-
-
-class Role(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-
-    def get_key(self):
-        return str(self.id)
-
-    def get_value(self):
-        return self.name
-
-    class Meta:
-        db_table = 'sos_role'

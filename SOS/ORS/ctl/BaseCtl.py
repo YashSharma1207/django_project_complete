@@ -1,12 +1,12 @@
-from abc import ABC, abstractmethod
-
 from django.http import HttpResponse
+from abc import ABC, abstractmethod
 
 
 class BaseCtl(ABC):
     preload_data = {}
+
+    dynamic_preload = {}
     page_list = {}
-    dynamic_preload={}
 
     def __init__(self):
         self.form = {}
@@ -16,11 +16,11 @@ class BaseCtl(ABC):
         self.form["inputError"] = {}
         self.form["pageNo"] = 1
 
-    def preload(self, request):
+    def preload(self, request, id):
         pass
 
     def execute(self, request, params={}):
-        self.preload(request)
+        self.preload(request, params)
         if "GET" == request.method:
             return self.display(request, params)
         elif "POST" == request.method:
