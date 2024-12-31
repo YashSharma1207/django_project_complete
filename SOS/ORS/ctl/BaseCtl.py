@@ -4,8 +4,8 @@ from abc import ABC, abstractmethod
 
 class BaseCtl(ABC):
     preload_data = {}
-
     dynamic_preload = {}
+    static_preload = {}
     page_list = {}
 
     def __init__(self):
