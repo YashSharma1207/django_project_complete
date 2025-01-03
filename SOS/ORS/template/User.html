@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
 </head>
 <body>
 {% include "Header.html" %}
-<form action="/User/" method="POST">
+<form action="/ORS/User/" method="POST">
     {% csrf_token %}
     <div align="center">
         <h1>Add User</h1>
@@ -52,7 +51,7 @@
             <tr>
                 <th>Gender:</th>
                 <td>
-                    {{ gender_preload|safe }}
+                    {{ form.preload.gender|safe }}
                 </td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.gender }}</td>
             </tr>
@@ -64,7 +63,7 @@
             <tr>
                 <th>Role:</th>
                 <td>
-                    {{ role_preload|safe }}
+                    {{ form.preload.role|safe }}
                 </td>
                 <td style="position: fixed; color: red;"> {{ form.inputError.roleId }}</td>
             </tr>

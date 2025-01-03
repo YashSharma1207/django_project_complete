@@ -12,7 +12,7 @@ class UserCtl(BaseCtl):
 
     def preload(self, request, params):
 
-        self.form["gender"] = request.POST.get('gender','')
+        self.form["gender"] = request.POST.get('gender', '')
         self.form["roleId"] = request.POST.get('roleId', 0)
 
         if (params['id'] > 0):
@@ -20,11 +20,19 @@ class UserCtl(BaseCtl):
             self.form["gender"] = obj.gender
             self.form["roleId"] = obj.roleId
 
-        gender_dict = {"Male": "Male" , "Female": "Female"}
-        self.page_list = RoleService().preload()
-        self.static_preload = HTMLUtility.get_list_from_dict('gender', self.form["gender"],gender_dict)
-        self.dynamic_preload = HTMLUtility.get_list_from_objects('roleId', self.form["roleId"], self.page_list)
+        self.static_preload = {"Male": "Male", "Female": "Female"}
+        self.dynamic_preload = RoleService().preload()
 
+        self.form["preload"]["gender"] = HTMLUtility.get_list_from_dict(
+            'gender',
+            self.form["gender"],
+            self.static_preload
+        )
+        self.form["preload"]["role"] = HTMLUtility.get_list_from_objects(
+            'roleId',
+            self.form["roleId"],
+            self.dynamic_preload
+        )
     def request_to_form(self, requestForm):
         self.form['id'] = requestForm['id']
         self.form['firstName'] = requestForm['firstName']
@@ -149,7 +157,7 @@ class UserCtl(BaseCtl):
             dup = self.get_service().get_model().objects.exclude(id=pk).filter(loginId=self.form['loginId'])
             if dup.count() > 0:
                 self.form['error'] = True
-                self.form['message'] = "Login Id already exist"
+                self.form['message'] = "Login ID Already Exist"
                 res = render(request, self.get_template(), {'form': self.form, 'role_preload': self.dynamic_preload,'gender_preload': self.static_preload})
             else:
                 r = self.form_to_model(User())
@@ -157,13 +165,13 @@ class UserCtl(BaseCtl):
                 self.form['id'] = r.id
 
                 self.form['error'] = False
-                self.form['message'] = "Data updated successfully"
+                self.form['message'] = "Data Updated Successfully"
                 res = render(request, self.get_template(), {'form': self.form, 'role_preload': self.dynamic_preload,'gender_preload': self.static_preload})
         else:
             duplicate = self.get_service().get_model().objects.filter(loginId=self.form['loginId'])
             if duplicate.count() > 0:
                 self.form['error'] = True
-                self.form['message'] = "Login Id already exist"
+                self.form['message'] = "Login ID Already Exist"
                 res = render(request, self.get_template(), {'form': self.form, 'role_preload': self.dynamic_preload,'gender_preload': self.static_preload})
             else:
                 r = self.form_to_model(User())
@@ -171,7 +179,7 @@ class UserCtl(BaseCtl):
                 self.form['id'] = r.id
 
                 self.form['error'] = False
-                self.form['message'] = "Data saved successfully"
+                self.form['message'] = "Data Saved Successfully"
                 res = render(request, self.get_template(), {'form': self.form, 'role_preload': self.dynamic_preload,'gender_preload': self.static_preload})
         return res
 

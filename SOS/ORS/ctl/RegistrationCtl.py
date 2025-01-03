@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .BaseCtl import BaseCtl
@@ -6,9 +5,22 @@ from ..utility.DataValidator import DataValidator
 from ..models import User
 from ..service.UserService import UserService
 from ..service.RoleService import RoleService
+from ..utility.HTMLUtility import HTMLUtility
 
 
 class RegistrationCtl(BaseCtl):
+
+    def preload(self, request, params):
+
+        self.form["gender"] = request.POST.get('gender', '')
+
+        self.static_preload = {"Male": "Male", "Female": "Female"}
+
+        self.form["preload"]["gender"] = HTMLUtility.get_list_from_dict(
+            'gender',
+            self.form["gender"],
+            self.static_preload
+        )
 
     def request_to_form(self, requestForm):
         self.form['id'] = requestForm['id']
@@ -129,7 +141,7 @@ class RegistrationCtl(BaseCtl):
         r = self.form_to_model(User())
         self.get_service().save(r)
         self.form['error'] = False
-        self.form['message'] = "User Registration successfully..!!"
+        self.form['message'] = "User Registration Successfully..!!"
         res = render(request, self.get_template(), {'form': self.form})
         return res
 

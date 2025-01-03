@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 
 
 class BaseCtl(ABC):
-    preload_data = {}
     dynamic_preload = {}
     static_preload = {}
     page_list = {}
@@ -15,6 +14,7 @@ class BaseCtl(ABC):
         self.form["error"] = False
         self.form["inputError"] = {}
         self.form["pageNo"] = 1
+        self.form["preload"] = {}
 
     def preload(self, request, id):
         pass
@@ -34,6 +34,8 @@ class BaseCtl(ABC):
                     return self.next(request, params)
                 elif (request.POST.get("operation") == "previous"):
                     return self.previous(request, params)
+                elif (request.POST.get("operation") == "new"):
+                    return self.new(request, params)
                 else:
                     return self.submit(request, params)
         else:
