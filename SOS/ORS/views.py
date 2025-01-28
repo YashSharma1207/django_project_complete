@@ -1,7 +1,6 @@
 from django.contrib.sessions.models import Session
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
 from .ctl.RegistrationCtl import RegistrationCtl
 from .ctl.LoginCtl import LoginCtl
 from .ctl.WelcomeCtl import WelcomeCtl
@@ -9,6 +8,7 @@ from .ctl.UserCtl import UserCtl
 from .ctl.RoleCtl import RoleCtl
 from .ctl.UserListCtl import UserListCtl
 from .ctl.ForgetPasswordCtl import ForgetPasswordCtl
+from .ctl.AttributeCtl import AttributeCtl
 
 @csrf_exempt
 def action(request, page="", operation="", id=0):

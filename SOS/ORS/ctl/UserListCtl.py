@@ -39,7 +39,7 @@ class UserListCtl(BaseCtl):
         res = render(request, self.get_template(), {'pageList': self.page_list, 'form': self.form})
         return res
 
-    def new(self, request, params={}):
+    def new(self,request,params={}):
         res = redirect("/ORS/User/")
         return res
 

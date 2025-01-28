@@ -36,3 +36,52 @@ class User(models.Model):
 
     class Meta:
         db_table = 'sos_user'
+
+
+class Attribute(models.Model):
+    display = models.CharField(max_length=50)
+    datatype = models.CharField(max_length=50)
+    isActive = models.CharField(max_length=40)
+    description = models.CharField(max_length=30)
+
+    def get_key(self):
+        return str(self.id)
+
+    def get_value(self):
+        return self.datatype
+
+    class Meta:
+        db_table = 'sos_attribute'
+
+
+class Initiative(models.Model):
+    initiativeName = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)
+    startDate = models.DateField(max_length=25)
+    version = models.IntegerField()
+
+    def get_key(self):
+        return str(self.id)
+
+    def get_value(self):
+        return self.initiativeName
+
+    class Meta:
+        db_table = 'sos_initiative'
+
+
+class Employee(models.Model):
+    fullName = models.CharField(max_length=50)
+    userName = models.EmailField()
+    password = models.CharField(max_length=50)
+    birthDate = models.DateField(max_length=30)
+    contactNumber = models.CharField(max_length=15, default='')
+
+    def get_key(self):
+        return str(self.id)
+
+    def get_value(self):
+        return self.fullName
+
+    class Meta:
+        db_table = 'sos_employee'
