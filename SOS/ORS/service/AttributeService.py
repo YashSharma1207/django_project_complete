@@ -1,13 +1,14 @@
-from multiprocessing import connection
+
 from ..models import Attribute
-from ..service.BaseService import BaseService
 from ..utility.DataValidator import DataValidator
+from .BaseService import BaseService
+from django.db import connection
 
 
 class AttributeService(BaseService):
 
     def search(self, params):
-        pageNo = ((params["pageNo"] - 1) * self.pageSize)
+        pageNo = (params["pageNo"] - 1) * self.pageSize
         sql = "select * from sos_attribute where 1=1"
         val = params.get("display", None)
         if DataValidator.isNotNull(val):

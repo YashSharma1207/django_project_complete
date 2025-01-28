@@ -13,7 +13,7 @@ class AttributeCtl(BaseCtl):
 
         if (params['id'] > 0):
             obj = self.get_service().get(params['id'])
-            self.form["isActive"] = obj.gender
+            self.form["isActive"] = obj.isActive
         self.static_preload = {"Yes": "Yes", "No": "No"}
         self.form["preload"]["isActive"] = HTMLUtility.get_list_from_dict(
             'isActive',

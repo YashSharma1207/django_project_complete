@@ -9,6 +9,7 @@ from .ctl.RoleCtl import RoleCtl
 from .ctl.UserListCtl import UserListCtl
 from .ctl.ForgetPasswordCtl import ForgetPasswordCtl
 from .ctl.AttributeCtl import AttributeCtl
+from .ctl.AttributeListCtl import AttributeListCtl
 
 @csrf_exempt
 def action(request, page="", operation="", id=0):
