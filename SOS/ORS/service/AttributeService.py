@@ -18,7 +18,7 @@ class AttributeService(BaseService):
         print("--------", sql, pageNo, self.pageSize)
         cursor.execute(sql, [pageNo, self.pageSize])
         result = cursor.fetchall()
-        columnName = ("id", "display", "datatype", "isActive", "description")
+        columnName = ('id', 'display','datatype' ,'isActive', 'description')
         res = {
             "data": [],
         }
