@@ -73,3 +73,10 @@ class DataValidator:
             return False
         else:
             return True
+
+    @classmethod
+    def isInteger(self, val):
+        if re.match("^-?\d+$", val):
+            return False
+        else:
+            return True

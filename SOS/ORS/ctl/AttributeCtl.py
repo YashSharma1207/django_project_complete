@@ -10,7 +10,6 @@ class AttributeCtl(BaseCtl):
     def preload(self, request, params):
 
         self.form["isActive"] = request.POST.get('isActive', '')
-
         if (params['id'] > 0):
             obj = self.get_service().get(params['id'])
             self.form["isActive"] = obj.isActive
