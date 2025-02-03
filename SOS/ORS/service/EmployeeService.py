@@ -1,25 +1,23 @@
+from ..models import Employee
+from ..utility.DataValidator import DataValidator
+from .BaseService import BaseService
 from django.db import connection
 
-from ..models import Initiative
-from .BaseService import BaseService
-from ..utility.DataValidator import DataValidator
 
-
-class InitiativeService(BaseService):
+class EmployeeService(BaseService):
 
     def search(self, params):
         pageNo = (params["pageNo"] - 1) * self.pageSize
-        sql = "select * from sos_initiative where 1=1"
-        val = params.get("initiativeName", None)
+        sql = "select * from sos_employee where 1=1"
+        val = params.get("fullName", None)
         if DataValidator.isNotNull(val):
-            sql += " and initiativeName like '" + val + "%%'"
+            sql += " and fullName like '" + val + "%%'"
         sql += " limit %s, %s"
         cursor = connection.cursor()
         print("--------", sql, pageNo, self.pageSize)
         cursor.execute(sql, [pageNo, self.pageSize])
         result = cursor.fetchall()
-        columnName = ("id", "initiativeName", "type", "startDate", "version")
-
+        columnName = ('id', 'fullName', 'userName', 'password', 'birthDate', 'contactNumber')
         res = {
             "data": [],
         }
@@ -30,4 +28,5 @@ class InitiativeService(BaseService):
         return res
 
     def get_model(self):
-        return Initiative
+        return Employee
+
